@@ -1,3 +1,6 @@
+# jqwik (property based tests)
+.jqwik-database
+
 # adr tools
 .adr-dir
 
