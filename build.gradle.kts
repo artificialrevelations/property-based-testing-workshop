@@ -8,8 +8,8 @@ repositories {
 }
 
 dependencies {
-    // aggregate jqwik dependency
-    testImplementation("net.jqwik:jqwik:1.2.7")
+    testImplementation("net.jqwik:jqwik-api:1.2.7")
+    testRuntimeOnly("net.jqwik:jqwik-engine:1.2.7")
 
     // Assertions library
     testImplementation("org.assertj:assertj-core:3.12.2")
