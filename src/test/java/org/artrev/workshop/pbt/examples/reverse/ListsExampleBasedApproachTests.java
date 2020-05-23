@@ -78,6 +78,27 @@ public class ListsExampleBasedApproachTests {
                 assertTrue(result.containsAll(tested));
                 assertTrue(tested.containsAll(result));
             }
+
+            @Test
+            public void should_have_order_of_elements_reversed() {
+                // given:
+                final List<String> tested = Arrays.asList("This", "is", "a", "test");
+                // when:
+                final List<String> result = Lists.reverse(tested);
+                // then:
+                assertEquals(tested.get(0), result.get(3));
+                assertEquals(tested.get(1), result.get(2));
+                assertEquals(tested.get(2), result.get(1));
+                assertEquals(tested.get(3), result.get(0));
+
+                /*
+                  What about the five element list?
+                  What about the six element list?
+                  What about the ten element list?
+
+                  Should we add more examples?
+                 */
+            }
         }
     }
 }
