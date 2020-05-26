@@ -2,12 +2,12 @@ package org.artrev.workshop.pbt.examples.maccarthy91;
 
 /**
  * This class contains several different implementations of McCarthy 91 function.
- *
+ * <p>
  * As described by the Wikipedia:
  * The McCarthy 91 function is a recursive function, defined by the computer
  * scientist John McCarthy as a test case for formal verification within computer
  * science.
- *
+ * <p>
  * For more information please check the page:
  * https://en.wikipedia.org/wiki/McCarthy_91_function
  */
@@ -38,6 +38,16 @@ public class Maccarthy {
         }
     }
 
+    /**
+     * The simplest implementation of the function without nested
+     * recursion, tail recursion, iteration. Function does not
+     * perform any complicated calculation and returns value 91
+     * for any argument that is less or equal to 100. For values
+     * above 100 it returns value minus 10.
+     *
+     * @param n value
+     * @return n - 10 for values greater then 100, 91 otherwise.
+     */
     public static int maccarthy91_nonrecursive(final int n) {
         if (n > 100) {
             return n - 10;
@@ -46,6 +56,11 @@ public class Maccarthy {
         }
     }
 
+    /**
+     *
+     * @param n
+     * @return
+     */
     public static int maccarthy91_iterative(final int n) {
         int counter = 1;
         int accumulator = n;
