@@ -10,7 +10,7 @@ import java.util.Random;
 import static org.artrev.workshop.pbt.examples.reverse.Lists.reverse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class ListsExampleBasedPropertyTests {
+public class ListReverseExampleBasedPropertyTests {
     @Test
     public void reverse_reversed_equals_original() {
         // given:
@@ -85,7 +85,7 @@ public class ListsExampleBasedPropertyTests {
      that we've created.
      */
     private Generator<List<String>> randomStringListsGenerator() {
-        return ListsExampleBasedPropertyTests::getRandomList;
+        return ListReverseExampleBasedPropertyTests::getRandomList;
     }
 
     /*
@@ -162,6 +162,10 @@ public class ListsExampleBasedPropertyTests {
         quickCheck(seedValue, numberOfTries, reverseProperty, generator);
     }
 
+    /*
+      Let's use a seed that was used in the failing example and run a test
+      with it to reproduce the results.
+     */
     @Test
     public void custom_reverse_property_from_seed() {
         final int numberOfTries = 1000;
@@ -184,10 +188,23 @@ public class ListsExampleBasedPropertyTests {
     }
 
     /*
-      Would be nice if we would not have to repeat 1000 tests even in the case
-      of supplied seed!
-      Would be nice if we would receive the smallest failing example as possible! Like
-      the framework would shrink the test data to find it?
-      Are there tools like these out there?
+      What else do we need?
+
+      There are a few things that would a nice thing to have:
+      - if we could not have to repeat the test 1000 times even if we pass the failing seed.
+
+      In the implementation above although we can repeat the tests with the same random
+      number generator thanks to the seed value, we cannot just repeat the one failing
+      example that our "framework" has found. To be completely honest we can because
+      we can just copy the example data that was printed but we would have to write another
+      tests where we could pass this example data to, there is no easy and quick way to do
+      it.
+
+      - if we could receive the smallest failing example as possible!
+
+      In the example seed -2569510089704470893 the list that caused the property to fail was
+      rather small but it could be much much shorter instead. The wrong property fails for a list
+      as short as [1, 2]. Our "framework" does not have a capability of shrinking the failing
+      example unfortunately.
      */
 }

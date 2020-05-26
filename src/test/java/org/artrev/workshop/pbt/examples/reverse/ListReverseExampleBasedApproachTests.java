@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @DisplayName("Lists tests")
-public class ListsExampleBasedApproachTests {
+public class ListReverseExampleBasedApproachTests {
     @Nested
     @DisplayName("Reverse on")
     public class ReverseTests {
