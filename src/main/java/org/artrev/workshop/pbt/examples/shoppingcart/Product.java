@@ -2,6 +2,10 @@ package org.artrev.workshop.pbt.examples.shoppingcart;
 
 import java.util.Objects;
 
+/**
+ * Describes a product available in the shop. Does not describe the current
+ * quantity in the storage.
+ */
 public class Product {
     private final String name;
     private final Price price;
