@@ -85,7 +85,14 @@ public class ListReverseExampleBasedPropertyTests {
      that we've created.
      */
     private Generator<List<String>> randomStringListsGenerator() {
-        return ListReverseExampleBasedPropertyTests::getRandomList;
+        return seed -> {
+            final int randomSize = randInt(seed, 0, 100);
+            final List<String> randomizedList = new ArrayList<>(randomSize);
+            for (int i = 0; i < randomSize; i++) {
+                randomizedList.add(String.valueOf(randInt(seed, 0, 100)));
+            }
+            return randomizedList;
+        };
     }
 
     /*
@@ -124,6 +131,9 @@ public class ListReverseExampleBasedPropertyTests {
     public void custom_reverse_property_test() {
         // Let's try 1000 times to find a counterexample
         final int numberOfTries = 1000;
+        // this value will help us with reproducing the issue
+        // if any is found
+        final long seedValue = new Random().nextLong();
 
         // Let's prepare our property, it's nice that it does not
         // rely on the type but is fully generic
@@ -133,9 +143,6 @@ public class ListReverseExampleBasedPropertyTests {
         final Generator<List<String>> generator =
                 randomStringListsGenerator();
 
-        // this value will help us with reproducing the issue
-        // if any is found
-        final long seedValue = new Random().nextLong();
         quickCheck(seedValue, numberOfTries, reverseProperty, generator);
     }
 

@@ -35,6 +35,10 @@ public class ListReversePropertyBasedTests {
      shrunk sample which can be used for testing. It is possible to configure an
      after failure strategy, for example jqwik will use the previous seed that failed
      when property is run again.
+
+     Another aspect that can be appreciated about shrinking the example List is that
+     the values on these lists were shrunk as well. We easily carould have gotten an example
+     like [2321231231, 1231231212] instead of simple [0, 1]
      */
     @Property
     @Report(Reporting.GENERATED)
