@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Assertions;
 
 import java.util.Objects;
 
-public class AddProductCommand implements Command<ShoppingCartModel, ShoppingCart> {
+public final class AddProductCommand implements Command<ShoppingCartModel, ShoppingCart> {
     private final Product product;
     private final Quantity quantity;
 

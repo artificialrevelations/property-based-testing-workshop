@@ -23,9 +23,10 @@ public class ShoppingCartTest {
                 Arbitraries.oneOf(
                         getAddProductCommands(),
                         getClearCommands(),
-                        getRemoveProductCommand(),
-                        getGetTotalQuantityCommand(),
-                        getGetTotalPriceCommand()
+                        getRemoveProductCommands(),
+                        getGetTotalQuantityCommands(),
+                        getGetTotalPriceCommands(),
+                        getClearDiscountCommands()
                 )
         );
     }

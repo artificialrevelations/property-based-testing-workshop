@@ -78,6 +78,10 @@ public class ShoppingCartModel {
                 "\n\t}";
     }
 
+    public void clearDiscount() {
+        discount = 0;
+    }
+
     private static class ShoppingCartModelElement {
         public String product;
         public int price;

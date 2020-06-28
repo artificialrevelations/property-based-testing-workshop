@@ -45,18 +45,22 @@ public final class ShoppingCartCommands {
         return Arbitraries.constant(new ClearCommand());
     }
 
-    public static Arbitrary<Action<Tuple2<ShoppingCartModel, ShoppingCart>>> getRemoveProductCommand() {
+    public static Arbitrary<Action<Tuple2<ShoppingCartModel, ShoppingCart>>> getRemoveProductCommands() {
         return Combinators.combine(
                 getProducts(),
                 getQuantities()
         ).as(RemoveProductCommand::new);
     }
 
-    public static Arbitrary<Action<Tuple2<ShoppingCartModel, ShoppingCart>>> getGetTotalQuantityCommand() {
+    public static Arbitrary<Action<Tuple2<ShoppingCartModel, ShoppingCart>>> getGetTotalQuantityCommands() {
         return Arbitraries.constant(new GetTotalQuantityCommand());
     }
 
-    public static Arbitrary<Action<Tuple2<ShoppingCartModel, ShoppingCart>>> getGetTotalPriceCommand() {
+    public static Arbitrary<Action<Tuple2<ShoppingCartModel, ShoppingCart>>> getGetTotalPriceCommands() {
         return Arbitraries.constant(new GetTotalPriceCommand());
+    }
+
+    public static Arbitrary<Action<Tuple2<ShoppingCartModel, ShoppingCart>>> getClearDiscountCommands() {
+        return Arbitraries.constant(new ClearDiscountCommand());
     }
 }
