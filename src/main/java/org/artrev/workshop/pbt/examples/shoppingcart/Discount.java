@@ -46,8 +46,6 @@ public final class Discount {
 
     @Override
     public String toString() {
-        return "Discount{" +
-                "value=" + value +
-                '}';
+        return "Discount(" + value + ')';
     }
 }

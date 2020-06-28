@@ -48,6 +48,6 @@ public final class Price {
 
     @Override
     public String toString() {
-        return "Price{ value=" + value + '}';
+        return "Price(" + value + ')';
     }
 }

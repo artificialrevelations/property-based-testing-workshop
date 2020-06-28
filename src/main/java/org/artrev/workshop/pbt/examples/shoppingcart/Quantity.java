@@ -82,6 +82,6 @@ public final class Quantity implements Comparable<Quantity>, Serializable {
 
     @Override
     public String toString() {
-        return "Quantity{ value=" + value + '}';
+        return "Quantity(" + value + ')';
     }
 }
