@@ -4,7 +4,7 @@ import org.artrev.workshop.pbt.examples.shoppingcart.ShoppingCart;
 import org.artrev.workshop.pbt.examples.shoppingcart.model.ShoppingCartModel;
 import org.junit.jupiter.api.Assertions;
 
-public class ClearCommand implements Command<ShoppingCartModel, ShoppingCart> {
+public final class ClearCommand implements Command<ShoppingCartModel, ShoppingCart> {
     @Override
     public void execute(final ShoppingCartModel model,
                         final ShoppingCart sut) {

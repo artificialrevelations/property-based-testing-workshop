@@ -46,8 +46,8 @@ public final class RemoveProductCommand implements Command<ShoppingCartModel, Sh
     @Override
     public String toString() {
         return "RemoveProductCommand{" +
-                "\n\t\tproduct=" + product +
-                "\n\t\tquantity=" + quantity +
+                " product=" + product +
+                ", quantity=" + quantity +
                 '}';
     }
 }

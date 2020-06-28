@@ -24,4 +24,9 @@ public final class GetTotalPriceCommand implements Command<ShoppingCartModel, Sh
                 "Total price of products in model does not equal to total price in SUT"
         );
     }
+
+    @Override
+    public String toString() {
+        return "GetTotalPriceCommand{}";
+    }
 }

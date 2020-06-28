@@ -25,4 +25,9 @@ public final class GetTotalQuantityCommand implements Command<ShoppingCartModel,
                 "Total quantity of products in model does not equal to total quantity in SUT"
         );
     }
+
+    @Override
+    public String toString() {
+        return "GetTotalQuantityCommand{}";
+    }
 }

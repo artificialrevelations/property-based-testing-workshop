@@ -6,8 +6,6 @@ import org.artrev.workshop.pbt.examples.shoppingcart.ShoppingCart;
 import org.artrev.workshop.pbt.examples.shoppingcart.model.ShoppingCartModel;
 import org.junit.jupiter.api.Assertions;
 
-import java.util.Objects;
-
 public final class AddProductCommand implements Command<ShoppingCartModel, ShoppingCart> {
     private final Product product;
     private final Quantity quantity;
@@ -44,30 +42,10 @@ public final class AddProductCommand implements Command<ShoppingCartModel, Shopp
     }
 
     @Override
-    public boolean equals(final Object other) {
-        if (this == other) return true;
-        if (other == null || getClass() != other.getClass()) return false;
-
-        final AddProductCommand that = (AddProductCommand) other;
-
-        if (!Objects.equals(product, that.product))
-            return false;
-
-        return Objects.equals(quantity, that.quantity);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = product != null ? product.hashCode() : 0;
-        result = 31 * result + (quantity != null ? quantity.hashCode() : 0);
-        return result;
-    }
-
-    @Override
     public String toString() {
         return "AddProductCommand{" +
-                "\n\t\tproduct=" + product +
-                "\n\t\tquantity=" + quantity +
-                "\n\t}";
+                " product=" + product +
+                ", quantity=" + quantity +
+                "}";
     }
 }

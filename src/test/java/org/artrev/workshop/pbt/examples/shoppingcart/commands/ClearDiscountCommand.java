@@ -22,4 +22,9 @@ public final class ClearDiscountCommand implements Command<ShoppingCartModel, Sh
                 "Total price of products after clearing discount in model does not equal to total price in SUT"
         );
     }
+
+    @Override
+    public String toString() {
+        return "ClearDiscountCommand{}";
+    }
 }
