@@ -63,7 +63,10 @@ public class ShoppingCartModel {
         for (final ShoppingCartModelElement element : products) {
             total += element.quantity * element.price;
         }
-        return total;
+
+        final int discountedPrice = (total * discount) / 100;
+
+        return total - discountedPrice;
     }
 
     public void clear() {
@@ -80,6 +83,10 @@ public class ShoppingCartModel {
 
     public void clearDiscount() {
         discount = 0;
+    }
+
+    public void setDiscount(final int value) {
+        discount = value;
     }
 
     private static class ShoppingCartModelElement {

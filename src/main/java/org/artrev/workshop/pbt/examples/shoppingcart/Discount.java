@@ -9,6 +9,10 @@ public final class Discount {
         this.value = value;
     }
 
+    public int getValue() {
+        return value;
+    }
+
     public Price applyTo(final Price price) {
         final int discountedPriceValue =
                 (price.getValue() * value) / 100;

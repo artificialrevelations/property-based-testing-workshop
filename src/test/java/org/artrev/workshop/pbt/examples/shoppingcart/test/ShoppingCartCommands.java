@@ -5,10 +5,7 @@ import net.jqwik.api.Arbitrary;
 import net.jqwik.api.Combinators;
 import net.jqwik.api.Tuple.Tuple2;
 import net.jqwik.api.stateful.Action;
-import org.artrev.workshop.pbt.examples.shoppingcart.Price;
-import org.artrev.workshop.pbt.examples.shoppingcart.Product;
-import org.artrev.workshop.pbt.examples.shoppingcart.Quantity;
-import org.artrev.workshop.pbt.examples.shoppingcart.ShoppingCart;
+import org.artrev.workshop.pbt.examples.shoppingcart.*;
 import org.artrev.workshop.pbt.examples.shoppingcart.commands.*;
 import org.artrev.workshop.pbt.examples.shoppingcart.model.ShoppingCartModel;
 
@@ -30,6 +27,14 @@ public final class ShoppingCartCommands {
         return Arbitraries.integers()
                 .between(1, 200)
                 .map(Quantity::from)
+                .filter(Optional::isPresent)
+                .map(Optional::get);
+    }
+
+    private static Arbitrary<Discount> getDiscounts() {
+        return Arbitraries.integers()
+                .between(0, 100)
+                .map(Discount::from)
                 .filter(Optional::isPresent)
                 .map(Optional::get);
     }
@@ -62,5 +67,9 @@ public final class ShoppingCartCommands {
 
     public static Arbitrary<Action<Tuple2<ShoppingCartModel, ShoppingCart>>> getClearDiscountCommands() {
         return Arbitraries.constant(new ClearDiscountCommand());
+    }
+
+    public static Arbitrary<Action<Tuple2<ShoppingCartModel, ShoppingCart>>> getSetDiscountCommands() {
+        return getDiscounts().map(SetDiscountCommand::new);
     }
 }

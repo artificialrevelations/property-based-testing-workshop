@@ -26,7 +26,8 @@ public class ShoppingCartTest {
                         getRemoveProductCommands(),
                         getGetTotalQuantityCommands(),
                         getGetTotalPriceCommands(),
-                        getClearDiscountCommands()
+                        getClearDiscountCommands(),
+                        getSetDiscountCommands()
                 )
         );
     }
