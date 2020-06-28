@@ -34,11 +34,14 @@ public class AddProductCommand implements Command<ShoppingCartModel, ShoppingCar
     public void postcondition(final ShoppingCartModel model,
                               final ShoppingCart sut) {
         Assertions.assertTrue(sut.get(product).isPresent());
-        sut.get(product)
-                .ifPresent(quantity -> Assertions.assertEquals(
-                        model.getQuantity(product.getName()),
-                        quantity.getValue()
-                ));
+
+        final int sutQuantity = sut.get(product).get().getValue();
+        final int modelQuantity = model.getQuantity(product.getName());
+        Assertions.assertEquals(
+                modelQuantity,
+                sutQuantity,
+                "Product name = " + product.getName() + ", Model quantity = " + modelQuantity + ", SUT quantity = " + sutQuantity
+        );
     }
 
     @Override

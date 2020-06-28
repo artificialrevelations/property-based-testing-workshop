@@ -37,8 +37,8 @@ public class ShoppingCartItem {
     @Override
     public String toString() {
         return "ShoppingCartItem{" +
-                " product=" + product +
-                ", quantity=" + quantity +
-                '}';
+                "\n\t\tproduct=" + product +
+                "\n\t\tquantity=" + quantity +
+                "\n\t}";
     }
 }

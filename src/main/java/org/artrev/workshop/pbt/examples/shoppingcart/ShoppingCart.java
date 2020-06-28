@@ -28,10 +28,6 @@ public class ShoppingCart {
     public void add(final Product product,
                     final Quantity quantity) {
 
-        if (products.size() > 3) {
-            return;
-        }
-
         final Optional<ShoppingCartItem> cartItem =
                 products
                         .stream()
@@ -95,9 +91,9 @@ public class ShoppingCart {
 
     @Override
     public String toString() {
-        return "ShoppingCart {" +
-                " products=" + products +
-                ", discount=" + discount +
-                '}';
+        return "ShoppingCart{" +
+                "\n\t\tproducts=" + products +
+                "\n\t\tdiscount=" + discount +
+                "\n\t}";
     }
 }

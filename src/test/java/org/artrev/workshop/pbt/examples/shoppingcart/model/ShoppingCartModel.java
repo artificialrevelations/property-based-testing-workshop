@@ -69,9 +69,9 @@ public class ShoppingCartModel {
     @Override
     public String toString() {
         return "ShoppingCartModel{" +
-                " products=" + products +
-                ", discount=" + discount +
-                '}';
+                "\n\t\tproducts=" + products +
+                "\n\t\tdiscount=" + discount +
+                "\n\t}";
     }
 
     private static class ShoppingCartModelElement {
@@ -92,10 +92,10 @@ public class ShoppingCartModel {
         @Override
         public String toString() {
             return "ShoppingCartModelElement{" +
-                    " product='" + product + '\'' +
-                    ", price=" + price +
-                    ", quantity=" + quantity +
-                    '}';
+                    "\n\t\t\t\tproduct='" + product +
+                    "\n\t\t\t\tprice=" + price +
+                    "\n\t\t\t\tquantity=" + quantity +
+                    "\n\t}";
         }
     }
 }
