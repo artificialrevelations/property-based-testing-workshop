@@ -1,42 +1,101 @@
 package org.artrev.workshop.pbt.examples.shoppingcart.model;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
 public class ShoppingCartModel {
-    private Map<String, Integer> productQuantityMap = new HashMap<>();
-    private Map<String, Integer> productPriceMap = new HashMap<>();
-    // ...
+    private final List<ShoppingCartModelElement> products = new LinkedList<>();
+    private int discount = 0; //%
 
-    public void addProduct(String product, int quantity, int price) {
-        final int newQuantity;
-        if (productQuantityMap.containsKey(product)) {
-            final int oldQuantity = productQuantityMap.get(product);
-            newQuantity = oldQuantity + quantity;
-        } else {
-            newQuantity = 0;
+    public void addProduct(final String product,
+                           final int price,
+                           final int quantity) {
+        for (final ShoppingCartModelElement element : products) {
+            if (element.product.contentEquals(product)) {
+                element.quantity = element.quantity + quantity;
+                return;
+            }
         }
-        productQuantityMap.put(product, newQuantity);
-        productPriceMap.put(product, price);
+
+        products.add(new ShoppingCartModelElement(product, price, quantity));
     }
 
-    public int getQuantity(String product) {
-        if (productQuantityMap.containsKey(product)) {
-            return productQuantityMap.get(product);
+    public void removeProduct(final String product, final int quantity) {
+        final Iterator<ShoppingCartModelElement> iterator = products.iterator();
+        while (iterator.hasNext()) {
+            final ShoppingCartModelElement element = iterator.next();
+            if (element.product.contentEquals(product)) {
+                final int newQuantity = element.quantity - quantity;
+                if (newQuantity > 0) {
+                    element.quantity = newQuantity;
+                } else {
+                    iterator.remove();
+                }
+                return;
+            }
+        }
+    }
+
+    public boolean isEmpty() {
+        return products.isEmpty();
+    }
+
+    public int getNumberOfProducts() {
+        return products.size();
+    }
+
+    public int getQuantity(final String product) {
+        for (final ShoppingCartModelElement element : products) {
+            if (element.product.contentEquals(product)) {
+                return element.quantity;
+            }
         }
         return 0;
     }
 
     public int getTotalQuantity() {
         int total = 0;
-        for (final Map.Entry<String, Integer> product : productQuantityMap.entrySet()) {
-            total += product.getValue();
+        for (final ShoppingCartModelElement element : products) {
+            total += element.quantity;
         }
         return total;
     }
 
     public void clear() {
-        productPriceMap.clear();
-        productQuantityMap.clear();
+        products.clear();
+    }
+
+    @Override
+    public String toString() {
+        return "ShoppingCartModel{" +
+                " products=" + products +
+                ", discount=" + discount +
+                '}';
+    }
+
+    private static class ShoppingCartModelElement {
+        public String product;
+        public int price;
+        public int quantity;
+
+        public ShoppingCartModelElement(
+                final String product,
+                final int price,
+                final int quantity
+        ) {
+            this.product = product;
+            this.price = price;
+            this.quantity = quantity;
+        }
+
+        @Override
+        public String toString() {
+            return "ShoppingCartModelElement{" +
+                    " product='" + product + '\'' +
+                    ", price=" + price +
+                    ", quantity=" + quantity +
+                    '}';
+        }
     }
 }
