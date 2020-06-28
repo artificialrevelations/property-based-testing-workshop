@@ -1,17 +1,18 @@
 package org.artrev.workshop.pbt.examples.shoppingcart.commands;
 
-import org.artrev.workshop.pbt.examples.shoppingcart.Command;
+import org.artrev.workshop.pbt.examples.shoppingcart.Product;
 import org.artrev.workshop.pbt.examples.shoppingcart.Quantity;
 import org.artrev.workshop.pbt.examples.shoppingcart.ShoppingCart;
 import org.artrev.workshop.pbt.examples.shoppingcart.model.ShoppingCartModel;
+import org.junit.jupiter.api.Assertions;
 
-public class RemoveProductCommand implements Command<ShoppingCartModel, ShoppingCart> {
-    private final int productIndex;
+public final class RemoveProductCommand implements Command<ShoppingCartModel, ShoppingCart> {
+    private final Product product;
     private final Quantity quantity;
 
-    public RemoveProductCommand(final int productIndex,
+    public RemoveProductCommand(final Product product,
                                 final Quantity quantity) {
-        this.productIndex = productIndex;
+        this.product = product;
         this.quantity = quantity;
     }
 
@@ -19,22 +20,34 @@ public class RemoveProductCommand implements Command<ShoppingCartModel, Shopping
     public boolean precondition(final ShoppingCartModel model,
                                 final ShoppingCart sut) {
         // we can only remove a product if there is something
-        return !model.isEmpty() &&
-                productIndex >= 0 &&
-                productIndex < model.getNumberOfProducts();
+        return !model.isEmpty();
     }
 
     @Override
     public void execute(final ShoppingCartModel model,
                         final ShoppingCart sut) {
-//        final ProductModel productModel =
-//                new ArrayList<>(model.getProducts()).get(productIndex);
-
-
+        model.removeProduct(product.getName(), quantity.getValue());
+        sut.remove(product, quantity);
     }
 
     @Override
     public void postcondition(ShoppingCartModel model, ShoppingCart sut) {
+        final int modelQuantity =
+                model.getQuantity(product.getName());
+        final int sutQuantity =
+                sut.get(product).map(Quantity::getValue).orElse(0);
 
+        Assertions.assertEquals(
+                modelQuantity,
+                sutQuantity
+        );
+    }
+
+    @Override
+    public String toString() {
+        return "RemoveProductCommand{" +
+                "\n\t\tproduct=" + product +
+                "\n\t\tquantity=" + quantity +
+                '}';
     }
 }

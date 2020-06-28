@@ -41,10 +41,6 @@ public class ShoppingCartModel {
         return products.isEmpty();
     }
 
-    public int getNumberOfProducts() {
-        return products.size();
-    }
-
     public int getQuantity(final String product) {
         for (final ShoppingCartModelElement element : products) {
             if (element.product.contentEquals(product)) {
@@ -58,6 +54,14 @@ public class ShoppingCartModel {
         int total = 0;
         for (final ShoppingCartModelElement element : products) {
             total += element.quantity;
+        }
+        return total;
+    }
+
+    public int getTotalPrice() {
+        int total = 0;
+        for (final ShoppingCartModelElement element : products) {
+            total += element.quantity * element.price;
         }
         return total;
     }

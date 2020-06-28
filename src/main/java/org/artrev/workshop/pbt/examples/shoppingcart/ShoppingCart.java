@@ -3,8 +3,6 @@ package org.artrev.workshop.pbt.examples.shoppingcart;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 public class ShoppingCart {
     private final List<ShoppingCartItem> products = new ArrayList<>();
@@ -18,15 +16,15 @@ public class ShoppingCart {
                 .findFirst();
     }
 
-    public Set<Product> getAllProducts() {
-        return products
-                .stream()
-                .map(ShoppingCartItem::getProduct)
-                .collect(Collectors.toSet());
-    }
-
     public void add(final Product product,
                     final Quantity quantity) {
+
+
+        // Possible bug in the shopping cart implementation
+        // uncomment it and run the ShoppingCartTests
+        /*if (products.size() > 3) {
+            return;
+        }*/
 
         final Optional<ShoppingCartItem> cartItem =
                 products
@@ -47,10 +45,27 @@ public class ShoppingCart {
         ));
     }
 
-    public Quantity remove(final Product product,
-                           final Quantity quantity) {
+    public void remove(final Product product,
+                       final Quantity quantity) {
+        final Optional<ShoppingCartItem> cartItem =
+                products
+                        .stream()
+                        .filter(item -> item.getProduct().equals(product))
+                        .findFirst();
 
-        return Quantity.NOTHING;
+        final Quantity newQuantity =
+                cartItem
+                        .map(item -> item.getQuantity().minus(quantity))
+                        .orElse(Quantity.NOTHING);
+
+        cartItem.ifPresent(products::remove);
+
+        if (newQuantity != Quantity.NOTHING) {
+            products.add(new ShoppingCartItem(
+                    product,
+                    newQuantity
+            ));
+        }
     }
 
     public void clear() {

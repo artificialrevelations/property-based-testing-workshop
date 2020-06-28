@@ -1,4 +1,4 @@
-package org.artrev.workshop.pbt.examples.shoppingcart;
+package org.artrev.workshop.pbt.examples.shoppingcart.commands;
 
 import net.jqwik.api.Tuple;
 import net.jqwik.api.stateful.Action;

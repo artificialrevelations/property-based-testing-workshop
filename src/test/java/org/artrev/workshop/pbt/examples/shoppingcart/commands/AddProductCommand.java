@@ -1,6 +1,5 @@
 package org.artrev.workshop.pbt.examples.shoppingcart.commands;
 
-import org.artrev.workshop.pbt.examples.shoppingcart.Command;
 import org.artrev.workshop.pbt.examples.shoppingcart.Product;
 import org.artrev.workshop.pbt.examples.shoppingcart.Quantity;
 import org.artrev.workshop.pbt.examples.shoppingcart.ShoppingCart;

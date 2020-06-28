@@ -12,7 +12,7 @@ public final class Discount {
     public Price applyTo(final Price price) {
         final int discountedPriceValue =
                 (price.getValue() * value) / 100;
-        return Price.from(discountedPriceValue).get();
+        return Price.from(price.getValue() - discountedPriceValue).get();
     }
 
     public static Optional<Discount> from(final int value) {
@@ -38,5 +38,12 @@ public final class Discount {
     @Override
     public int hashCode() {
         return value;
+    }
+
+    @Override
+    public String toString() {
+        return "Discount{" +
+                "value=" + value +
+                '}';
     }
 }

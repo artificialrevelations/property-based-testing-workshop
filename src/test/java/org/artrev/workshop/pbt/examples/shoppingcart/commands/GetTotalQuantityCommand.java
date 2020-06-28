@@ -1,30 +1,28 @@
 package org.artrev.workshop.pbt.examples.shoppingcart.commands;
 
+import org.artrev.workshop.pbt.examples.shoppingcart.Quantity;
 import org.artrev.workshop.pbt.examples.shoppingcart.ShoppingCart;
 import org.artrev.workshop.pbt.examples.shoppingcart.model.ShoppingCartModel;
 import org.junit.jupiter.api.Assertions;
 
-public class ClearCommand implements Command<ShoppingCartModel, ShoppingCart> {
+public final class GetTotalQuantityCommand implements Command<ShoppingCartModel, ShoppingCart> {
+    private Quantity sutTotalQuantity;
+    private Quantity modelTotalQuantity;
+
     @Override
     public void execute(final ShoppingCartModel model,
                         final ShoppingCart sut) {
-        model.clear();
-        sut.clear();
+        sutTotalQuantity = sut.getTotalQuantity();
+        modelTotalQuantity = Quantity.from(model.getTotalQuantity()).get();
     }
 
     @Override
     public void postcondition(final ShoppingCartModel model,
                               final ShoppingCart sut) {
         Assertions.assertEquals(
-                model.getTotalQuantity(),
-                sut.getTotalPrice().getValue()
+                modelTotalQuantity,
+                sutTotalQuantity,
+                "Total quantity of products in model does not equal to total quantity in SUT"
         );
-        Assertions.assertEquals(0, model.getTotalQuantity());
-        Assertions.assertEquals(0, sut.getTotalPrice().getValue());
-    }
-
-    @Override
-    public String toString() {
-        return "ClearCommand{}";
     }
 }
